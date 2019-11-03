@@ -1,11 +1,21 @@
 class HashTable(object):
     def __init__(self, size):
+        """
+        Hash Table constructor
+        :param size: size of the table must be given
+        """
         self.keyArray = [None] * size
         self.valueArray = [None] * size
         self.size = size
         self._index = 0
 
     def set(self, key, value):
+        """
+        Setter for hash table. Open Addressing used for collisions.
+        :param key: key
+        :param value: value
+        :return: Hash Table value
+        """
         hashed_key = self.__hash__(key)
         if self.keyArray[hashed_key] is None:
             self.keyArray[hashed_key] = key
@@ -24,10 +34,20 @@ class HashTable(object):
                     break
 
     def get(self, key):
+        """
+        Getter for Hash Table item
+        :param key: key
+        :return: value
+        """
         index = self.keyArray.index(key)
         return self.valueArray[index]
 
     def index(self, value):
+        """
+        Getter for index of the value
+        :param value: value
+        :return: key
+        """
         index = self.valueArray.index(value)
         return self.keyArray[index]
 
@@ -50,6 +70,11 @@ class HashTable(object):
             raise StopIteration
 
     def __hash__(self, key):
+        """
+        The Hash Function. Linear Probing used for the Hash Function
+        :param key:
+        :return:
+        """
         hash = 0
         for i in range(len(key)):
             hash = (hash + ord(key[i])) % self.size
